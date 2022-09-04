@@ -1,0 +1,16 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-body {
+  padding: 2rem;
+  width: 400px;
+  height: 400px;
+  border-radius: 8px;
+  background: #fff;
+}
