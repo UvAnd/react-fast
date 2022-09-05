@@ -26,7 +26,7 @@ export default function Product({product}: IProductProps): JSX.Element {
       {shouldShowDetails && (
         <div>
           <p>{product.description}</p>
-          <p>Rating: <span style={{fontWeight: 'bold'}}>{product.rating.rate}</span></p>
+          <p>Rating: <span style={{fontWeight: 'bold'}}>{product?.rating?.rate}</span></p>
         </div>
       )}
     </div>

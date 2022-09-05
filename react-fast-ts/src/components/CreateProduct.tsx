@@ -16,7 +16,11 @@ const productData: IProduct  = {
   }
 }
 
-export default function CreateProdyct(): JSX.Element {
+interface ICreateProductProps {
+  onCreate(product: IProduct): void,
+}
+
+export default function CreateProdyct({onCreate}: ICreateProductProps): JSX.Element {
 
   const [valueTitle, setValueTitle] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -30,7 +34,9 @@ export default function CreateProdyct(): JSX.Element {
     }
 
     productData.title = valueTitle;
-    const response = await axios.post<IProduct>('https://fakestoreapi.com/products', productData)
+    const response = await axios.post<IProduct>('https://fakestoreapi.com/products', productData);
+
+    onCreate(response.data);
   }
 
   const changeHandler =  (event: React.ChangeEvent<HTMLInputElement>): void => {
