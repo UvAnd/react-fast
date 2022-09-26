@@ -1,7 +1,11 @@
-import React from 'react';
 import './app-header.css';
 
-const AppHeader = ({toDo, done}: any): JSX.Element => {
+interface IAppHeaderProps {
+  toDo: number;
+  done: number;
+}
+
+const AppHeader = ({toDo, done}: IAppHeaderProps): JSX.Element => {
   return (
     <div className="app-header d-flex">
       <h1>Todo List</h1>

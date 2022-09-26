@@ -1,8 +1,12 @@
 import React from 'react';
-
 import './search-panel.css';
 
-const SearchPanel = ({searchTodo, setSearchTodo}: any): JSX.Element => {
+interface ISearchPanelProps {
+  searchTodo: string;
+  setSearchTodo(value: string): void;
+}
+
+const SearchPanel = ({searchTodo, setSearchTodo}: ISearchPanelProps): JSX.Element => {
 
   const searchHandle = (e: React.FormEvent<HTMLInputElement>):void => {
     setSearchTodo(e.currentTarget.value);

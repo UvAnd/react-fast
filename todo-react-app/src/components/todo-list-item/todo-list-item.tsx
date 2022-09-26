@@ -1,6 +1,12 @@
-import React from 'react';
+import { ITodoItem } from '../../interfaces/todo-interfaces';
 
 import './todo-list-item.css';
+
+interface TodoListItemProps extends Omit<ITodoItem, 'id'> {
+  onDeleted(): void;
+  onToggleImportant(): void;
+  onToggleDone(): void;
+}
 
 const TodoListItem = ({
   label,
@@ -9,7 +15,7 @@ const TodoListItem = ({
   onDeleted,
   onToggleImportant,
   onToggleDone,
-}: any): JSX.Element => {
+}: TodoListItemProps): JSX.Element => {
 
 
   const doneClass = done ? 'done' : '';

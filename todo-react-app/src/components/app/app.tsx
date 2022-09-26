@@ -6,10 +6,13 @@ import ItemStatusFilter from '../item-status-filter';
 import './app.css';
 import { useState } from 'react';
 import ItemAddForm from '../item-add-form';
+import { ITodoItem, ITodoList } from '../../interfaces/todo-interfaces';
+
+
 
 const App = (): JSX.Element => {
 
-  const createTodoItem = (label: string): any => {
+  const createTodoItem = (label: string): ITodoItem => {
     return {
       label: label,
       important: false,
@@ -24,7 +27,7 @@ const App = (): JSX.Element => {
     { label: 'Have a lunch', important: false, done: false, id: 3 }
   ];
 
-  const [todoData, setTodoData] = useState([...todoDataBase]);
+  const [todoData, setTodoData] = useState<ITodoList>([...todoDataBase]);
 
   const deleteTodo = (id: number): void => {
     // const idx = todoData.findIndex((el) => el.id === id);
@@ -34,7 +37,7 @@ const App = (): JSX.Element => {
     // ]
 
     // INFO: Check variant with (prev) => {prev.filter((item) => item.id !== id}
-    const newArray = todoData.filter((item) => item.id !== id);
+    const newArray = todoData.filter((item: ITodoItem)  => item.id !== id);
     setTodoData(newArray);
   }
 
@@ -46,12 +49,12 @@ const App = (): JSX.Element => {
     setTodoData(newArray);
   }
 
-  const toggleProperty = (arr: any, id: any, propName: any): any => {
-    const idx = arr.findIndex((el: any) => el.id === id);
+  const toggleProperty = (arr: ITodoItem[], id: number, propName: string | number): ITodoList => {
+    const idx = arr.findIndex((el: ITodoItem) => el.id === id);
 
     // 1. update obj
     const oldItem = arr[idx];
-    const newItem = {...oldItem, [propName]: !oldItem[propName]};
+    const newItem = {...oldItem, [propName]: !oldItem[propName as keyof ITodoItem]};
 
     // 2. construnct new array
     return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
@@ -113,13 +116,12 @@ const App = (): JSX.Element => {
   ];
   const [statusFilter, setStatusFilter] = useState('All');
 
-  const filterTodos = (items: any, filter: string): any => {
+  const filterTodos = (items: ITodoList, filter: string): ITodoList | undefined => {
     switch(filter.toLowerCase()) {
       case 'all': return items;
-      case 'active' : return items.filter((item: any) => !item.done);
-      case 'done' : return items.filter((item: any) => item.done);
+      case 'active' : return items.filter((item: ITodoItem) => !item.done);
+      case 'done' : return items.filter((item: ITodoItem) => item.done);
       default : items;
-
     }
   }
 

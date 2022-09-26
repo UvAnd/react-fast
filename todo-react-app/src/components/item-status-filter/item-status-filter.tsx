@@ -1,12 +1,19 @@
-import React from 'react';
-
+import { ITabHeadings } from '../../interfaces/todo-interfaces';
 import './item-status-filter.css';
 
-const ItemStatusFilter = ({tabHeadings, setStatusFilter, statusFilter}: any): JSX.Element => {
+interface ITabHeadingProps {
+  tabHeadings: ITabHeadings[];
+  setStatusFilter(title: string): void;
+  statusFilter: string;
+}
+
+type TTab =  Omit<ITabHeadings, 'name'>;
+
+const ItemStatusFilter = ({tabHeadings, setStatusFilter, statusFilter}: ITabHeadingProps): JSX.Element => {
 
   return (
     <div className="btn-group">
-      {tabHeadings.map(({id, title}: any) => {
+      {tabHeadings.map(({id, title}: TTab) => {
         const tabClassName = `btn ${statusFilter ===  title ? 'btn-info' : 'btn-outline-secondary'}`;
         console.log(id);
         return (

@@ -1,11 +1,18 @@
-import React from 'react';
+import { ITodoItem, ITodoList } from '../../interfaces/todo-interfaces';
 
 import TodoListItem from '../todo-list-item';
 import './todo-list.css';
 
-const TodoList = ({ todos, onDeleted, onToggleImportant, onToggleDone, }: any): JSX.Element => {
+interface ITodoListProps {
+  todos: ITodoList | undefined;
+  onDeleted(id: number): void;
+  onToggleImportant(id: number): void;
+  onToggleDone(id: number): void;
+}
 
-  const elements = todos.map((item: any) => {
+const TodoList = ({ todos, onDeleted, onToggleImportant, onToggleDone }: ITodoListProps): JSX.Element => {
+
+  const elements = todos?.map((item: ITodoItem) => {
     const { id, ...itemProps } = item;
 
     return (
