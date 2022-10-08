@@ -1,51 +1,66 @@
 import React, { useEffect, useState } from 'react';
+import { PLANET_STATE } from '../../constants/constants';
 
 import { useGetPlanet } from '../../hooks/swapi-service.hooks'
+import { IPlanet } from '../../interfaces/interfaces';
+import ErrorIndicator from '../error-indicator';
+import Spinner from '../spinner';
 
 import './random-planet.css';
 
-const state = {
-  id: 2,
-  name: null,
-  population: null,
-  rotationPeriod: null,
-  diameter: null
-} as {
-  id: number | null,
-  name: null,
-  population: null,
-  rotationPeriod: null,
-  diameter: null
+interface IPlanetViewProps {
+  planet: IPlanet;
 }
 
-
 const RandomPlanet = (): JSX.Element => {
-  const [planetInfo, setPlanetInfo] = useState({...state});
-  const {id, name, population, rotationPeriod, diameter} = planetInfo;
-  const ID = Math.floor(Math.random() * 15) + 2;
+  // TODO: optimize Planet state
+  const [planetInfo, setPlanetInfo] = useState<IPlanet>(PLANET_STATE);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  const getPerson = useGetPlanet(ID);
+  const getPlanet = useGetPlanet;
+
+  const onPlanetLoaded = (planetItem: IPlanet) => {
+    setPlanetInfo(planetItem);
+    setIsLoading(false);
+  };
+
+  const onError = () => {
+    setIsError(true);
+    setIsLoading(false);
+  }
+
+  const updatePlanet = () => {
+    const ID_RANDOM = Math.floor(Math.random() * 15) + 2;
+    const getRandPlanet = getPlanet(ID_RANDOM);
+    getRandPlanet.then(onPlanetLoaded).catch(onError);
+  }
 
   useEffect(() => {
-    getPerson.then((planetItem) => {
-      const {planet, id} = planetItem;
-      console.log(planetItem);
-      console.log('id', id);
-
-
-      setPlanetInfo({
-        id: id,
-        name: planet.name,
-        population: planet.population,
-        rotationPeriod: planet.rotation_period,
-        diameter: planet.diameter,
-      });
-    });
+    updatePlanet();
+    const interval = setInterval(() => {
+      updatePlanet();
+    }, 10000);
+    return () => clearInterval(interval);
   }, []);
 
+  const isHasData = !(isLoading || isError);
+  const planetView = isHasData && <PlanetView planet={planetInfo}></PlanetView>;
 
   return (
     <div className="random-planet card jumbotron rounded ">
+      {isError && <ErrorIndicator></ErrorIndicator>}
+      {isLoading ? <Spinner></Spinner> :  planetView}
+    </div>
+  );
+}
+
+
+const PlanetView = ({planet}: IPlanetViewProps): JSX.Element => {
+  const {id, name, population, rotationPeriod, diameter} = planet;
+
+  return (
+    <>
       <img
         className="planet-image"
         src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
@@ -68,8 +83,8 @@ const RandomPlanet = (): JSX.Element => {
           </li>
         </ul>
       </div>
-    </div>
-  );
+    </>
+  )
 }
 
 export default RandomPlanet;

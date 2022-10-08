@@ -1,0 +1,59 @@
+@keyframes ldio-gio9tx1so8o {
+  0% { transform: rotate(0) }
+  100% { transform: rotate(360deg) }
+}
+.ldio-gio9tx1so8o div { box-sizing: border-box!important }
+.ldio-gio9tx1so8o > div {
+  position: absolute;
+  width: 126px;
+  height: 126px;
+  top: 37px;
+  left: 37px;
+  border-radius: 50%;
+  border: 10px solid #000;
+  border-color: #85a2b6 transparent #85a2b6 transparent;
+  animation: ldio-gio9tx1so8o 1s linear infinite;
+}
+.ldio-gio9tx1so8o > div:nth-child(2) { border-color: transparent }
+.ldio-gio9tx1so8o > div:nth-child(2) div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.ldio-gio9tx1so8o > div:nth-child(2) div:before, .ldio-gio9tx1so8o > div:nth-child(2) div:after { 
+  content: "";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  left: 48px;
+  background: #85a2b6;
+  border-radius: 50%;
+  box-shadow: 0 116px 0 0 #85a2b6;
+}
+.ldio-gio9tx1so8o > div:nth-child(2) div:after { 
+  left: -10px;
+  top: 48px;
+  box-shadow: 116px 0 0 0 #85a2b6;
+}
+.loadingio-spinner-dual-ring-na7zf16gxte {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.ldio-gio9tx1so8o {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+
+}
+.ldio-gio9tx1so8o div { box-sizing: content-box; }

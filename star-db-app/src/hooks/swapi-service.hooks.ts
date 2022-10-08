@@ -1,6 +1,8 @@
 import { API_BASE } from "../constants/constants";
+import { IDSwapiOptions, IPerson, IStarship } from "../interfaces/interfaces";
+import { IPlanet } from "../interfaces/interfaces";
 
-export const useGetResource = async (url: any) => {
+export const useGetResource = async (url: string) => {
   const res = await fetch(`${API_BASE}${url}`);
 
   if(!res.ok) {
@@ -12,30 +14,71 @@ export const useGetResource = async (url: any) => {
 
 export const useGetAllPeople = async () => {
   const res = await useGetResource(`/people/`);
-  return res.results;
+  return res.results.map(useTransformPerson);
 }
 
-export const useGetPerson = async (id: number) => {
+export const useGetPerson = async (id: number | null) => {
   const person = await useGetResource(`/people/${id}/`);
-  return person;
+  return useTransformPerson(person);
 }
 
 export const useGetAllPlanets = async () => {
   const res = await useGetResource(`/planets/`);
-  return res.results;
+  return res.results.map(useTransformPlanet);
 }
 
 export const useGetPlanet = async (id: number) => {
   const planet = await useGetResource(`/planets/${id}/`);
-  return {planet, id};
+  return useTransformPlanet(planet);
 }
 
 export const useGetAllStarships = async () => {
   const res = await useGetResource(`/starships/`);
-  return res.results;
+  return res.results.map(useTransformStarship);
 }
 
 export const useGetStarship = async (id: number) => {
   const starship = await useGetResource(`/starships/${id}/`);
-  return starship;
+  return useTransformStarship(starship);
+}
+
+// TODO: Check how create Dynamic object
+const useExtractId = (item: any)=> {
+  const idRegExp = /\/([0-9]*)\/$/;
+  return item.url.match(idRegExp)[1];
+}
+
+const useTransformPerson = (person: IPerson): IPerson => {
+  return {
+    id: useExtractId(person),
+    name: person.name,
+    gender: person.gender,
+    birthYear: person.birthYear,
+    eyeColor: person.eyeColor
+  }
+}
+
+// TODO: Property 'rotation_period' does not exist on type 'IPlanet'.
+const useTransformPlanet = (planet: IDSwapiOptions<string>): IPlanet => {
+  return {
+    id: useExtractId(planet),
+    name: planet.name,
+    population: planet.population,
+    rotationPeriod: planet.rotation_period,
+    diameter: planet.diameter,
+  }
+}
+
+const useTransformStarship = (starship: IStarship): IStarship => {
+  return {
+    id: useExtractId(starship),
+    name: starship.name,
+    model: starship.model,
+    manufacturer: starship.manufacturer,
+    costInCredits: starship.costInCredits,
+    length: starship.length,
+    crew: starship.crew,
+    passengers: starship.passengers,
+    cargoCapacity: starship.cargoCapacity
+  }
 }
