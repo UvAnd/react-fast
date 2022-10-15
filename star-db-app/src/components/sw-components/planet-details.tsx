@@ -26,5 +26,4 @@ const PlanetDetails = ({ itemId }: IItemDetailsProps) => {
   );
 };
 
-
 export default PlanetDetails;

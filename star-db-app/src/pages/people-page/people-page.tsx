@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Row from '../components/row';
 import { PersonDetails, PersonList } from '../../components/sw-components';
 import { useNavigate, useParams } from 'react-router-dom';

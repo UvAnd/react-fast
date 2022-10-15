@@ -9,7 +9,7 @@ interface IItemDetailsProps {
 }
 
 const PersonDetails = ({ itemId }: IItemDetailsProps) => {
-  // OR - const value = useContext(Context); - const Context = createContext('Default Value');
+  // INFO: OR - const value = useContext(Context); - const Context = createContext('Default Value');
 
   return (
     <SwapiServiceConsumer>

@@ -42,12 +42,12 @@ const ItemDetails = ({ selectedItem, getData, getImgUrl, children }: IItemDetail
     if (!personId) { return; }
 
     setIsLoadin(true);
+
     getData(personId).then((itemDetails) => {
       setItem(itemDetails);
       setIsLoadin(false);
     })
   }
-
 
   if (!item) {
     return <span>Select a person from a list</span>

@@ -59,7 +59,6 @@ const RandomPlanet = ({updateInterval = 2000}: IRandomPlanetProps): JSX.Element 
   );
 }
 
-
 const PlanetView = ({planet}: IPlanetViewProps): JSX.Element => {
   const {id, name, population, rotationPeriod, diameter} = planet;
 
