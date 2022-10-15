@@ -1,24 +1,19 @@
-import { useState } from 'react';
-import Row from '../components/row';
-import { StarshipDetails, StarshipList } from '../../components/sw-components';
 
-const PeoplePage = (): JSX.Element => {
-  const [selectedStarship, setSelectedStarship] = useState<number | null>(null);
+import { useNavigate } from "react-router-dom";
+import { StarshipList } from '../../components/sw-components';
 
-  const onOpenStarship = (id: number) => {
-    setSelectedStarship(id);
-  }
+const StarshipPage = (): JSX.Element => {
+
+  let navigate = useNavigate();
+
+  const historyPush = (itemId: number) =>  navigate(itemId);
 
   return (
-    <Row
-      leftChild={
-        <StarshipList onItemSelected={onOpenStarship} ></StarshipList>
-        }
-      rightChild={
-        <StarshipDetails itemId={selectedStarship}></StarshipDetails>
-      }
-    />
+    <StarshipList onItemSelected={historyPush} ></StarshipList>
   );
 };
 
-export default PeoplePage;
+export default StarshipPage;
+
+// INFO: We can use withRouter
+// const ShowTheLocationWithRouter = withRouter(ShowTheLocation);
