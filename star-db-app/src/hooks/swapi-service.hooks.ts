@@ -1,4 +1,4 @@
-import { API_BASE } from "../constants/constants";
+import { API_BASE, IMG_BASE } from "../constants/constants";
 import { IDSwapiOptions, IPerson, IStarship } from "../interfaces/interfaces";
 import { IPlanet } from "../interfaces/interfaces";
 
@@ -82,3 +82,27 @@ const useTransformStarship = (starship: IStarship): IStarship => {
     cargoCapacity: starship.cargoCapacity
   }
 }
+
+export const useGetPersonImg = (id: number)=> {
+  return `${IMG_BASE}/characters/${id}.jpg`;
+}
+
+export const useGetStarshipImg = (id: number)=> {
+  return `${IMG_BASE}/starships/${id}.jpg`;
+}
+
+export const useGetPlanetImg = (id: number)=> {
+  return `${IMG_BASE}/planets/${id}.jpg`;
+}
+
+export const swapiServiceHooks = {
+  useGetPerson,
+  useGetPlanet,
+  useGetStarship,
+  useTransformPerson,
+  useTransformPlanet,
+  useTransformStarship,
+  useGetPersonImg,
+  useGetStarshipImg,
+  useGetPlanetImg,
+};

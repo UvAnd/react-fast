@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PLANET_STATE } from '../../constants/constants';
 
 import { useGetPlanet } from '../../hooks/swapi-service.hooks'
@@ -8,11 +8,15 @@ import Spinner from '../spinner';
 
 import './random-planet.css';
 
+interface IRandomPlanetProps {
+  updateInterval?: number;
+}
+
 interface IPlanetViewProps {
   planet: IPlanet;
 }
 
-const RandomPlanet = (): JSX.Element => {
+const RandomPlanet = ({updateInterval = 2000}: IRandomPlanetProps): JSX.Element => {
   // TODO: optimize Planet state
   const [planetInfo, setPlanetInfo] = useState<IPlanet>(PLANET_STATE);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,7 +44,7 @@ const RandomPlanet = (): JSX.Element => {
     updatePlanet();
     const interval = setInterval(() => {
       updatePlanet();
-    }, 10000);
+    }, updateInterval);
     return () => clearInterval(interval);
   }, []);
 
@@ -54,7 +58,6 @@ const RandomPlanet = (): JSX.Element => {
     </div>
   );
 }
-
 
 const PlanetView = ({planet}: IPlanetViewProps): JSX.Element => {
   const {id, name, population, rotationPeriod, diameter} = planet;
@@ -86,6 +89,11 @@ const PlanetView = ({planet}: IPlanetViewProps): JSX.Element => {
     </>
   )
 }
+
+// How it work?
+// RandomPlanet.defaulteProps = {
+//   updateInterval: 10000
+// }
 
 export default RandomPlanet;
 

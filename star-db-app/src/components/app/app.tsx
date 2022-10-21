@@ -1,23 +1,24 @@
-
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-
+import { SwapiServiceProvider } from '../swapi-service-context';
+import { swapiServiceHooks } from '../../hooks/swapi-service.hooks';
+import RoutesList from "../routes";
 import './app.css';
-import PeoplePage from '../../pages/people-page';
 
 const App = (): JSX.Element => {
-
-
   return (
-    <div className='container'>
-      <Header />
-      <RandomPlanet />
-
-      <PeoplePage></PeoplePage>
-      <PeoplePage></PeoplePage>
-      <PeoplePage></PeoplePage>
-
-    </div>
+    <SwapiServiceProvider value={swapiServiceHooks} >
+      <Router>
+        <div className='container'>
+          <Header />
+          <RandomPlanet updateInterval={10000} />
+          <RoutesList></RoutesList>
+        </div>
+      </Router>
+    </SwapiServiceProvider>
   );
 };
 

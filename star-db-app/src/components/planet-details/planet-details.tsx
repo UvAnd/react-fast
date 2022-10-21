@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-
-
-
+// INFO: Just UI. We can remove it
 const PlanetDetails = (): JSX.Element => {
   return (
     <div className="person-details card">

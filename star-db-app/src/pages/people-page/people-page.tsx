@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
-import ItemList from '../../components/item-list';
-import PersonDetails from '../../components/person-details';
+import Row from '../components/row';
+import { PersonDetails, PersonList } from '../../components/sw-components';
+import { useNavigate, useParams } from 'react-router-dom';
 
+const PeoplePage = (): JSX.Element => {
 
-const PeoplePage = ():JSX.Element => {
-  const [selectedPerson, setSelectedPerson] = useState<number | null>(null);
-
-  const onOpenPerson = (id: number) => {
-    setSelectedPerson(id);
-  }
+  const navigate = useNavigate();
+  const historyPush = (itemId: number) =>  navigate(itemId);
+  const params = useParams();
+  const idPeopleDetails =  Number(params.id);
 
   return (
-    <div className="row mb2">
-      <div className="col-md-6">
-        <ItemList onOpenPerson={onOpenPerson} />
-      </div>
-      <div className="col-md-6">
-        <PersonDetails selectedPerson={selectedPerson} />
-      </div>
-    </div>
+    <Row
+      leftChild={
+        <PersonList onItemSelected={historyPush} ></PersonList>
+        }
+      rightChild={
+        <PersonDetails itemId={idPeopleDetails}></PersonDetails>
+      }
+    />
   );
 };
 

@@ -29,3 +29,7 @@ export interface IStarship {
 export interface IDSwapiOptions<T> {
   [name: string]: T
 }
+
+export type TRenderChild = string | JSX.Element;
+export type TItemDetails = IPerson | IPlanet | IStarship;
+export type TItemDetailsArray = IPerson[] | IPlanet[] | IStarship[];
