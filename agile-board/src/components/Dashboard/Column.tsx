@@ -1,11 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd';
 import Card from '@mui/material/Card';
 import Task from './Task';
+import { IBoardSection, ITask } from '../../interfaces/data.interfaces';
 
-const getItemStyle = (isDragging: any, draggableStyle: any): any => {
+const getItemStyle = (
+  isDragging: boolean,
+  draggableStyle: DraggingStyle | NotDraggingStyle | undefined,
+): React.CSSProperties => {
   return {
     padding: 8,
     marginBottom: 8,
@@ -14,16 +18,16 @@ const getItemStyle = (isDragging: any, draggableStyle: any): any => {
 };
 
 interface IColumnProps {
-  section: any;
+  section: IBoardSection;
 }
 
 const Column = ({ section }: IColumnProps): JSX.Element => {
   return (
     <div>
-      {section.tasks.map((task: any, index: any) => {
+      {section.tasks.map((task: ITask, index: number) => {
         return (
           <Draggable draggableId={task.id} key={task.id} index={index}>
-            {(provided: any, snapshot: any) => (
+            {(provided, snapshot): JSX.Element => (
               <Card
                 ref={provided.innerRef}
                 {...provided.draggableProps}

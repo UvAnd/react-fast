@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import { observer } from 'mobx-react-lite';
 import useStore from '../../hooks/useStore';
 import User from '../common/User';
+import { IBoardSection } from '../../interfaces/data.interfaces';
 
 function Header(): JSX.Element {
   const { boards, users } = useStore();
@@ -40,13 +41,15 @@ function Header(): JSX.Element {
                   <option value="" disabled>
                     –
                   </option>
-                  {boards?.boards.map((board: any) => {
-                    return (
-                      <option key={board?.id} value={board?.id}>
-                        {board?.title}
-                      </option>
-                    );
-                  })}
+                  {boards?.boards.map(
+                    (board: IBoardSection): JSX.Element => {
+                      return (
+                        <option key={board?.id} value={board?.id}>
+                          {board?.title}
+                        </option>
+                      );
+                    },
+                  )}
                 </Select>
               </FormControl>
             </Box>

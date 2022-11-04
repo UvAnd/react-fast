@@ -1,9 +1,10 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
+import { IUser } from '../../interfaces/data.interfaces';
 
 interface IUserProps {
-  user: any;
+  user: IUser | null;
 }
 
 function User({ user }: IUserProps): JSX.Element {

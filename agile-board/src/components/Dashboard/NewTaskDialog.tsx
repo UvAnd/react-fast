@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import Button from '@mui/material/Button';
 import {
-  Select,
   TextField,
   DialogTitle,
   DialogContent,
@@ -11,33 +10,45 @@ import {
   InputLabel,
   FormControl,
 } from '@mui/material/';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import useStore from '../../hooks/useStore';
+import { IUser } from '../../interfaces/data.interfaces';
 
 interface INewTaskDialogProps {
-  open: any;
-  sectionId: any;
-  handleClose: any;
+  isOpen: boolean;
+  sectionId: string | null;
+  handleClose(): void;
 }
 
+interface INewTask {
+  title?: string;
+  description?: string;
+  assignee?: string;
+}
+
+type TUpdateTaskStateEvent =
+  | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  | SelectChangeEvent;
+
 export default function NewTaskDialog({
-  open,
+  isOpen,
   sectionId,
   handleClose,
 }: INewTaskDialogProps): JSX.Element {
-  const [taskState, setTaskState] = useState<any>();
+  const [taskState, setTaskState] = useState<INewTask>();
   const { users, boards } = useStore();
 
-  const updateTaskState = (event: any): any => {
+  const updateTaskState = (event: TUpdateTaskStateEvent): void => {
     const { value, name } = event.target;
 
-    setTaskState((prevTaskState: any) => ({
+    setTaskState((prevTaskState: INewTask | undefined) => ({
       ...prevTaskState,
       [name]: value,
     }));
   };
 
   const createTask = useCallback(
-    (event: any): any => {
+    (event: React.ChangeEvent<HTMLFormElement>): void => {
       event.preventDefault();
 
       boards.active.addTask(sectionId, taskState);
@@ -48,7 +59,7 @@ export default function NewTaskDialog({
   );
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={isOpen} onClose={handleClose}>
       <DialogTitle id="alert-dialog-title">Creating A New Task:</DialogTitle>
       <form onSubmit={createTask}>
         <DialogContent style={{ minWidth: 500 }}>
@@ -91,13 +102,15 @@ export default function NewTaskDialog({
                 <option value="" disabled>
                   –
                 </option>
-                {users?.users?.map((user: any): any => {
-                  return (
-                    <option key={user.id} value={user.id}>
-                      {user.name}
-                    </option>
-                  );
-                })}
+                {users?.users?.map(
+                  (user: IUser): JSX.Element => {
+                    return (
+                      <option key={user.id} value={user.id}>
+                        {user.name}
+                      </option>
+                    );
+                  },
+                )}
               </Select>
             </FormControl>
           </Box>

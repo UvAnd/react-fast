@@ -1,20 +1,22 @@
-/* eslint-disable no-return-await */
-// 👇️ ts-nocheck ignores all ts errors in the file
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import qs from 'query-string';
+import { ITask, IUser } from '../interfaces/data.interfaces';
 
 // TODO: Move to const file
 export const DOMAIN = 'http://localhost:3001';
 
+type TConfigPerform = { method: string };
+type TPromiseData = IUser | ITask;
+
 // TODO; change class to function and update type
 class ApiCall {
-  constructor(domain) {
+  domain: string;
+
+  constructor(domain: string) {
     this.domain = domain;
   }
 
-  async perform(url, data, config): any {
+  // data = tasks[]
+  async perform(url: string, data?: ITask | null, config?: TConfigPerform): Promise<TPromiseData> {
     const request = await fetch(`${this.domain}/${url}`, {
       ...config,
       body: JSON.stringify(data),
@@ -23,29 +25,39 @@ class ApiCall {
       },
     });
 
-    return await request.json();
+    const resultRequest = await request.json();
+
+    return resultRequest;
   }
 
-  async get(path, searchParams = {}): any {
-    return await this.perform(`${path}?${qs.stringify(searchParams)}`);
+  async get(path: string, searchParams = {}): Promise<TPromiseData> {
+    const resultRequest = await this.perform(`${path}?${qs.stringify(searchParams)}`);
+
+    return resultRequest;
   }
 
-  async post(path, playload): any {
-    return await this.perform(path, playload, {
+  async post(path: string, playload: ITask): Promise<TPromiseData> {
+    const resultRequest = await this.perform(path, playload, {
       method: 'POST',
     });
+
+    return resultRequest;
   }
 
-  async put(path, playload): any {
-    return await this.perform(path, playload, {
+  async put(path: string, playload: ITask): Promise<TPromiseData> {
+    const resultRequest = await this.perform(path, playload, {
       method: 'PUT',
     });
+
+    return resultRequest;
   }
 
-  async delete(path): any {
-    return await this.perform(path, null, {
+  async delete(path: string): Promise<TPromiseData> {
+    const resultRequest = await this.perform(path, null, {
       method: 'DELETE',
     });
+
+    return resultRequest;
   }
 }
 

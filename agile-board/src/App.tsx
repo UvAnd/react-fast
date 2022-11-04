@@ -7,9 +7,6 @@ import Header from './components/Header';
 function App(): JSX.Element {
   const { users, boards } = useStore();
 
-  console.log('boards: ', boards.active?.toJSON());
-  console.log('boards: ', boards.active?.sections[0]?.tasks?.toJSON());
-
   return (
     <>
       <Header />

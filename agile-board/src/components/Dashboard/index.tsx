@@ -5,12 +5,13 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd';
 import Column from './Column';
 import useStore from '../../hooks/useStore';
 import NewTaskDialog from './NewTaskDialog';
+import { IBoardSection } from '../../interfaces/data.interfaces';
 
-const getListStyle = (isDraggingOver: any): any => ({
+const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
   background: isDraggingOver ? 'lightblue' : 'lightgrey',
   padding: 8,
   minHeight: 500,
@@ -18,14 +19,14 @@ const getListStyle = (isDraggingOver: any): any => ({
 
 function Dashboard(): JSX.Element {
   const { boards } = useStore();
-  const [newTaskTo, setNewTask] = useState(null);
+  const [newTaskTo, setNewTask] = useState<string | null>(null);
 
   const closeDialog = useCallback(() => {
     setNewTask(null);
   }, [setNewTask]);
 
-  const onDragEnd = useCallback(
-    (event: any) => {
+  const onDragEnd = useCallback<OnDragEndResponder>(
+    (event) => {
       const { source, destination, draggableId: taskId } = event;
 
       boards.active.moveTask(taskId, source, destination);
@@ -33,11 +34,13 @@ function Dashboard(): JSX.Element {
     [boards],
   );
 
+  const isOpenModal = !!newTaskTo;
+
   return (
     <Box p={2}>
       <DragDropContext onDragEnd={onDragEnd}>
         <Grid container spacing={3}>
-          {boards?.active?.sections.map((section: any) => {
+          {boards?.active?.sections.map((section: IBoardSection) => {
             return (
               <Grid item key={section.id} xs>
                 <Paper>
@@ -72,7 +75,7 @@ function Dashboard(): JSX.Element {
           })}
         </Grid>
       </DragDropContext>
-      <NewTaskDialog open={!!newTaskTo} sectionId={newTaskTo} handleClose={closeDialog} />
+      <NewTaskDialog isOpen={isOpenModal} sectionId={newTaskTo} handleClose={closeDialog} />
     </Box>
   );
 }
