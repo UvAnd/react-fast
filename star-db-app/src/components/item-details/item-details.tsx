@@ -26,63 +26,61 @@ export const Record = ({ item, field, label }: IRecordProps): JSX.Element => {
       <span>{item?.[field as keyof TItemDetails]}</span>
     </li>
   );
-}
+};
 
-const ItemDetails = ({ selectedItem, getData, getImgUrl, children }: IItemDetailsProps): JSX.Element => {
-
+const ItemDetails = ({
+  selectedItem,
+  getData,
+  getImgUrl,
+  children,
+}: IItemDetailsProps): JSX.Element => {
   const [item, setItem] = useState<TItemDetails | null>(null);
   const [isLoadin, setIsLoadin] = useState<boolean>(false);
 
-  useEffect(() => {
-    updatePerson();
-  }, [selectedItem]);
-
-  const updatePerson = () => {
+  const updatePerson = (): void => {
     const personId = selectedItem;
-    if (!personId) { return; }
+    if (!personId) {
+      return;
+    }
 
     setIsLoadin(true);
 
     getData(personId).then((itemDetails) => {
       setItem(itemDetails);
       setIsLoadin(false);
-    })
-  }
+    });
+  };
+
+  useEffect(() => {
+    updatePerson();
+  }, [selectedItem]);
 
   if (!item) {
-    return <span>Select a person from a list</span>
+    return <span>Select a person from a list</span>;
   }
 
   if (isLoadin) {
-    return <Spinner></Spinner>
+    return <Spinner />;
   }
 
-  const {
-    id,
-    name,
-  } = item;
+  const { id, name } = item;
 
   return (
     <div className="item-details card">
-      <img className="item-image"
-        src={getImgUrl(id)}
-        alt=''
-      />
+      <img className="item-image" src={getImgUrl(id)} alt="" />
 
       <div className="card-body">
         <h4>{name}</h4>
         <h6>{selectedItem}</h6>
         <ul className="list-group list-group-flush">
-          {
-            Children.map(children, (child) => {
-              // TODO: find solution to cloneElement into TS
-              return cloneElement(child as ReactElement<any>, { item });
-            })
-          }
+          {Children.map(children, (child) => {
+            // TODO: find solution to cloneElement into TS
+            return cloneElement(child as ReactElement<any>, { item });
+          })}
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ItemDetails;

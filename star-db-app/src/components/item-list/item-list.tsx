@@ -1,32 +1,55 @@
 import { useEffect, useState } from 'react';
-import { IPerson, TRenderChild } from '../../interfaces/interfaces';
+import {
+  IPerson,
+  TItemDetails,
+  TItemDetailsArray,
+  TRenderChild,
+} from '../../interfaces/interfaces';
 import Spinner from '../spinner';
 import './item-list.css';
 
 interface IItemPerson {
   onItemSelected(id: number): void;
-  getData(): Promise<IPerson[]>;
-  renderItem(list: IPerson): TRenderChild;
+  getData(): Promise<TItemDetailsArray>;
+  renderItem(list: TItemDetails): TRenderChild;
 }
 interface IRenderItem {
-  list: IPerson[];
+  list: TItemDetailsArray;
   onItemSelected(id: number): void;
-  renderItem(list: IPerson): TRenderChild;
+  renderItem(list: TItemDetails): TRenderChild;
 }
 
-const ItemList = ({onItemSelected, getData, renderItem}: IItemPerson): JSX.Element => {
+// TODO: Move to new component
+const RenderItem = ({ list, onItemSelected, renderItem }: IRenderItem): JSX.Element => {
+  return (
+    <>
+      {list.map((item: any) => {
+        const { id } = item;
+        const label = renderItem(item);
+        return (
+          <li key={id} className="list-group-item">
+            <button type="button" onClick={() => onItemSelected(id)}>
+              {label}
+            </button>
+          </li>
+        );
+      })}
+    </>
+  );
+};
 
-  const [peopleList, setPeopleList] = useState<IPerson[]>([]);
+const ItemList = ({ onItemSelected, getData, renderItem }: IItemPerson): JSX.Element => {
+  // TODO: Check other names and update to more generalized
+  const [peopleList, setPeopleList] = useState<TItemDetailsArray>([]);
 
   useEffect(() => {
-    getData()
-    .then((peopleItem) => {
+    getData().then((peopleItem) => {
       setPeopleList(peopleItem);
-    })
+    });
   }, []);
 
   if (!peopleList.length) {
-    return <Spinner></Spinner>
+    return <Spinner />;
   }
 
   return (
@@ -34,29 +57,6 @@ const ItemList = ({onItemSelected, getData, renderItem}: IItemPerson): JSX.Eleme
       <RenderItem list={peopleList} renderItem={renderItem} onItemSelected={onItemSelected} />
     </ul>
   );
-}
-
-
-const RenderItem = ({ list, onItemSelected, renderItem }: IRenderItem): JSX.Element => {
-  return (
-    <>
-      {
-        list.map((item: any) => {
-          const { id } = item;
-          const label = renderItem(item);
-          return (
-            <li key={id} className="list-group-item" onClick={() => onItemSelected(id)}>
-              {label}
-            </li>
-          );
-        })
-      }
-    </>
-  );
-}
-
-ItemList.defaulteProps = {
-  onItemSelected: () => {}
-}
+};
 
 export default ItemList;

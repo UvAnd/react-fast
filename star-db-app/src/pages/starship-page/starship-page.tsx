@@ -1,16 +1,12 @@
-
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { StarshipList } from '../../components/sw-components';
 
 const StarshipPage = (): JSX.Element => {
+  const navigate = useNavigate();
 
-  let navigate = useNavigate();
+  const historyPush = (itemId: number): void => navigate(itemId);
 
-  const historyPush = (itemId: number) =>  navigate(itemId);
-
-  return (
-    <StarshipList onItemSelected={historyPush} ></StarshipList>
-  );
+  return <StarshipList onItemSelected={historyPush} />;
 };
 
 export default StarshipPage;

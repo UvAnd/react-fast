@@ -11,24 +11,22 @@ interface IWithData {
   getData: any;
 }
 
-const WithData = ({getData}: IWithData): any => {
-
+const WithData = ({ getData }: IWithData): any => {
   const [data, setData] = useState<TItemDetailsArray>([]);
 
   useEffect(() => {
-    getData()
-    .then((data: TItemDetailsArray) => {
+    getData().then((data: TItemDetailsArray) => {
       setData(data);
-    })
+    });
   }, []);
 
   if (!data.length) {
-    return <Spinner></Spinner>
+    return <Spinner />;
   }
 
   return (props: any) => {
-    return  <ItemList {...props} data={data} />
-  } ;
+    return <ItemList {...props} data={data} />;
+  };
 };
 
 export default WithData;

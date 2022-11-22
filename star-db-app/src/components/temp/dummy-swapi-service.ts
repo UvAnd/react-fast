@@ -1,12 +1,11 @@
 export default class DummySwapiService {
-
   _people = [
     {
       id: 1,
       name: 'Bilbo Baggins [TEST DATA]',
       gender: 'male',
       birthYear: 'long ago',
-      eyeColor: 'dark brown'
+      eyeColor: 'dark brown',
     },
 
     {
@@ -14,8 +13,8 @@ export default class DummySwapiService {
       name: 'Frodo Baggins [TEST DATA]',
       gender: 'male',
       birthYear: 'long ago',
-      eyeColor: 'dark brown'
-    }
+      eyeColor: 'dark brown',
+    },
   ];
 
   _planets = [
@@ -24,15 +23,15 @@ export default class DummySwapiService {
       name: 'Earth [TEST DATA]',
       population: '7.530.000.000',
       rotationPeriod: '23 hours 56 seconds',
-      diameter: '12.742 km'
+      diameter: '12.742 km',
     },
     {
       id: 2,
       name: 'Venus [TEST DATA]',
       population: 'not known',
       rotationPeriod: '243 days',
-      diameter: '12.104 km'
-    }
+      diameter: '12.104 km',
+    },
   ];
 
   _starships = [
@@ -45,8 +44,8 @@ export default class DummySwapiService {
       length: 'approx 300 meters',
       crew: 1000,
       passengers: 50,
-      cargoCapacity: 100
-    }
+      cargoCapacity: 100,
+    },
   ];
 
   getAllPeople = async () => {
@@ -62,7 +61,7 @@ export default class DummySwapiService {
   };
 
   getPlanet = async () => {
-    return this._planets[0]
+    return this._planets[0];
   };
 
   getAllStarships = async () => {
@@ -74,7 +73,7 @@ export default class DummySwapiService {
   };
 
   getPersonImage = () => {
-    return `https://placeimg.com/400/500/people`
+    return `https://placeimg.com/400/500/people`;
   };
 
   getStarshipImage = () => {
@@ -82,6 +81,6 @@ export default class DummySwapiService {
   };
 
   getPlanetImage = () => {
-    return `https://placeimg.com/400/400/nature`
+    return `https://placeimg.com/400/400/nature`;
   };
 }

@@ -8,15 +8,15 @@ interface IItemDetailsProps {
   itemId: number | null;
 }
 
-const PlanetDetails = ({ itemId }: IItemDetailsProps) => {
+const PlanetDetails = ({ itemId }: IItemDetailsProps): JSX.Element => {
   return (
     <SwapiServiceConsumer>
       {(swapiServiceHooks) => (
         <ItemDetails
           selectedItem={itemId}
           getData={swapiServiceHooks.useGetPlanet}
-          getImgUrl={swapiServiceHooks.useGetPlanetImg}>
-
+          getImgUrl={swapiServiceHooks.useGetPlanetImg}
+        >
           <Record field="population" label="Population" />
           <Record field="rotationPeriod" label="Rotation Period" />
           <Record field="diameter" label="Diameter" />

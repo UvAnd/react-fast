@@ -8,21 +8,20 @@ interface IItemDetailsProps {
   itemId: number | null;
 }
 
-const StarshipDetails = ({ itemId }: IItemDetailsProps) => {
+const StarshipDetails = ({ itemId }: IItemDetailsProps): JSX.Element => {
   return (
     <SwapiServiceConsumer>
       {(swapiServiceHooks) => (
         <ItemDetails
           selectedItem={itemId}
           getData={swapiServiceHooks.useGetStarship}
-          getImgUrl={swapiServiceHooks.useGetStarshipImg}>
-
+          getImgUrl={swapiServiceHooks.useGetStarshipImg}
+        >
           <Record field="model" label="Model" />
           <Record field="length" label="Length" />
           <Record field="costInCredits" label="Cost" />
         </ItemDetails>
       )}
-
     </SwapiServiceConsumer>
   );
 };

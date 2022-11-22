@@ -27,7 +27,7 @@ export interface IStarship {
 }
 
 export interface IDSwapiOptions<T> {
-  [name: string]: T
+  [name: string]: T;
 }
 
 export type TRenderChild = string | JSX.Element;

@@ -8,7 +8,7 @@ interface IItemDetailsProps {
   itemId: number | null;
 }
 
-const PersonDetails = ({ itemId }: IItemDetailsProps) => {
+const PersonDetails = ({ itemId }: IItemDetailsProps): JSX.Element => {
   // INFO: OR - const value = useContext(Context); - const Context = createContext('Default Value');
 
   return (
@@ -17,13 +17,12 @@ const PersonDetails = ({ itemId }: IItemDetailsProps) => {
         <ItemDetails
           selectedItem={itemId}
           getData={swapiServiceHooks.useGetPerson}
-          getImgUrl={swapiServiceHooks.useGetPersonImg} >
-
+          getImgUrl={swapiServiceHooks.useGetPersonImg}
+        >
           <Record field="gender" label="Gender" />
           <Record field="eyeColor" label="Eye Color" />
         </ItemDetails>
       )}
-
     </SwapiServiceConsumer>
   );
 };
