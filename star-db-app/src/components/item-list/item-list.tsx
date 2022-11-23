@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  IPerson,
-  TItemDetails,
-  TItemDetailsArray,
-  TRenderChild,
-} from '../../interfaces/interfaces';
+import { TItemDetails, TItemDetailsArray, TRenderChild } from '../../interfaces/interfaces';
 import Spinner from '../spinner';
 import './item-list.css';
 

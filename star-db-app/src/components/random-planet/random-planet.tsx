@@ -16,8 +16,10 @@ interface IPlanetViewProps {
   planet: IPlanet;
 }
 
+const defaultInterval = 2000;
+
 // TODO: Move to new component
-const RandomPlanet = ({ updateInterval = 2000 }: IRandomPlanetProps): JSX.Element => {
+const RandomPlanet = ({ updateInterval = defaultInterval }: IRandomPlanetProps): JSX.Element => {
   const PlanetView = ({ planet }: IPlanetViewProps): JSX.Element => {
     const { id, name, population, rotationPeriod, diameter } = planet;
 
