@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { PLANET_STATE } from '../../constants/constants';
+import { PLANET_STATE } from 'constants/constants';
 
-import { useGetPlanet } from '../../hooks/swapi-service.hooks';
-import { IPlanet } from '../../interfaces/interfaces';
-import ErrorIndicator from '../error-indicator';
-import Spinner from '../spinner';
+import { useGetPlanet } from 'hooks/swapi-service.hooks';
+import { IPlanet } from 'interfaces/interfaces';
+import ErrorIndicator from 'components/error-indicator';
+import Spinner from 'components/spinner';
 
 import './random-planet.css';
 

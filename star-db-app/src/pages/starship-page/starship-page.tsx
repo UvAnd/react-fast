@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { StarshipList } from '../../components/sw-components';
+import { StarshipList } from 'components/sw-components';
 
 const StarshipPage = (): JSX.Element => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Row from '../components/row';
-import { PlanetDetails, PlanetList } from '../../components/sw-components';
+import { PlanetDetails, PlanetList } from 'components/sw-components';
+import Row from 'pages/components/row';
 
 const PlanetPage = (): JSX.Element => {
   const [selectedPlanet, setSelectedPlanet] = useState<number | null>(null);

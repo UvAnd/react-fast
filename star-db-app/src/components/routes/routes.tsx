@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LoginPage from '../../pages/login-page';
-import PeoplePage from '../../pages/people-page';
-import PlanetPage from '../../pages/planet-page';
-import SecretPage from '../../pages/secret-page';
-import StarshipPage from '../../pages/starship-page';
-import StarshipSingleDetails from '../starship-single-details';
+import LoginPage from 'pages/login-page';
+import PeoplePage from 'pages/people-page';
+import PlanetPage from 'pages/planet-page';
+import SecretPage from 'pages/secret-page';
+import StarshipPage from 'pages/starship-page';
+import StarshipSingleDetails from 'components/starship-single-details';
 
 function RoutesList(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

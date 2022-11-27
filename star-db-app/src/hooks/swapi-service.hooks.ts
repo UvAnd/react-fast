@@ -1,6 +1,7 @@
-import { API_BASE, IMG_BASE } from '../constants/constants';
-import { IDSwapiOptions, IPerson, IStarship, IPlanet } from '../interfaces/interfaces';
+import { API_BASE, IMG_BASE } from 'constants/constants';
+import { IDSwapiOptions, IPerson, IStarship, IPlanet } from 'interfaces/interfaces';
 
+// TODO: Check how create Dynamic object
 export const useGetResource = async (url: string): Promise<any> => {
   const res = await fetch(`${API_BASE}${url}`);
 

@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Row from '../components/row';
-import { PersonDetails, PersonList } from '../../components/sw-components';
+import { PersonDetails, PersonList } from 'components/sw-components';
+import Row from 'pages/components/row';
 
 const PeoplePage = (): JSX.Element => {
   const navigate = useNavigate();

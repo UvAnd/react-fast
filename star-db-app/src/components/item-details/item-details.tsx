@@ -1,6 +1,6 @@
 import { Children, cloneElement, ReactElement, ReactNode, useEffect, useState } from 'react';
-import { TItemDetails } from '../../interfaces/interfaces';
-import Spinner from '../spinner';
+import { TItemDetails } from 'interfaces/interfaces';
+import Spinner from 'components/spinner';
 
 import './item-details.css';
 

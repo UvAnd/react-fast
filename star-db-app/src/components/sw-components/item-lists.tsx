@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  useGetAllPeople,
-  useGetAllStarships,
-  useGetAllPlanets,
-} from '../../hooks/swapi-service.hooks';
-import { IPerson, IPlanet } from '../../interfaces/interfaces';
-import ItemList from '../item-list';
+import { useGetAllPeople, useGetAllStarships, useGetAllPlanets } from 'hooks/swapi-service.hooks';
+import { IPerson, IPlanet } from 'interfaces/interfaces';
+import ItemList from 'components/item-list';
 
 interface IItemListProps {
   onItemSelected(id: number): void;
@@ -16,7 +12,8 @@ const PersonList = ({ onItemSelected }: IItemListProps): JSX.Element => {
     <ItemList
       onItemSelected={onItemSelected}
       getData={useGetAllPeople}
-      // How we can use <>{(data: any) => (`${data.name} (${data.gender}, ${data.birthYear})`)}</> like child
+      // How we can use
+      // <>{(data: any) => (`${data.name} (${data.gender}, ${data.birthYear})`)}</> like child
       // Function as Child Component
       renderItem={({ name, gender, id }: IPerson) => `${name} (${gender}, ${id})`}
     />

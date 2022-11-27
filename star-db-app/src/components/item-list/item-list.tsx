@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { TItemDetails, TItemDetailsArray, TRenderChild } from '../../interfaces/interfaces';
-import Spinner from '../spinner';
+import { TItemDetails, TItemDetailsArray, TRenderChild } from 'interfaces/interfaces';
+import Spinner from 'components/spinner';
 import './item-list.css';
 
 interface IItemPerson {

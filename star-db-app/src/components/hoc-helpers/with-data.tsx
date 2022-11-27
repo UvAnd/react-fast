@@ -1,10 +1,10 @@
 // TODO: Check how we can use component like it
 
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import Spinner from '../spinner';
-import { TItemDetailsArray } from '../../interfaces/interfaces';
-import ItemList from '../item-list';
+import Spinner from 'components/spinner';
+import { TItemDetailsArray } from 'interfaces/interfaces';
+import ItemList from 'components/item-list';
 
 // TODO: remove any
 interface IWithData {

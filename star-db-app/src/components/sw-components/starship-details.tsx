@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ItemDetails from '../item-details';
-import { Record } from '../item-details/item-details';
-import { SwapiServiceConsumer } from '../swapi-service-context';
+import ItemDetails from 'components/item-details';
+import { Record } from 'components/item-details/item-details';
+import { SwapiServiceConsumer } from 'components/swapi-service-context';
 
 interface IItemDetailsProps {
   itemId: number | null;

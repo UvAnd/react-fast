@@ -1,3 +1,3 @@
-import PlanetPage from './planet-page';
+import PlanetPage from 'pages/planet-page/planet-page';
 
 export default PlanetPage;
