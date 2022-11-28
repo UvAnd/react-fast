@@ -6,6 +6,7 @@ import PlanetPage from 'pages/planet-page';
 import SecretPage from 'pages/secret-page';
 import StarshipPage from 'pages/starship-page';
 import StarshipSingleDetails from 'components/starship-single-details';
+import { EMainRouterLink } from 'models/router/main-router-link';
 
 function RoutesList(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,9 +17,9 @@ function RoutesList(): JSX.Element {
 
   return (
     <Routes>
-      <Route path="/" element={<h2>Welcome</h2>} />
-      <Route path="people/" element={<PeoplePage />}>
-        <Route path=":id" element={<PeoplePage />} />
+      <Route path={EMainRouterLink.Root} element={<h2>Welcome</h2>} />
+      <Route path={EMainRouterLink.People} element={<PeoplePage />}>
+        <Route path={EMainRouterLink.PageID} element={<PeoplePage />} />
       </Route>
       <Route path="planets" element={<PlanetPage />} />
       <Route path="starships" element={<StarshipPage />} />

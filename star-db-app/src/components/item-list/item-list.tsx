@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
-import { TItemDetails, TItemDetailsArray, TRenderChild } from 'interfaces/interfaces';
+import { useEffect, useState, ReactNode } from 'react';
+import { TItemDetails, TItemDetailsArray } from 'interfaces/interfaces';
 import Spinner from 'components/spinner';
 import './item-list.css';
 
 interface IItemPerson {
   onItemSelected(id: number): void;
   getData(): Promise<TItemDetailsArray>;
-  renderItem(list: TItemDetails): TRenderChild;
+  renderItem(list: TItemDetails): ReactNode;
 }
 interface IRenderItem {
   list: TItemDetailsArray;
   onItemSelected(id: number): void;
-  renderItem(list: TItemDetails): TRenderChild;
+  renderItem(list: TItemDetails): ReactNode;
 }
 
 // TODO: Move to new component

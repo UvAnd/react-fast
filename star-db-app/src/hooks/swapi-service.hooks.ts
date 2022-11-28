@@ -22,11 +22,8 @@ const useExtractId = (item: any): number => {
 
 const useTransformPerson = (person: IPerson): IPerson => {
   return {
+    ...person,
     id: useExtractId(person),
-    name: person.name,
-    gender: person.gender,
-    birthYear: person.birthYear,
-    eyeColor: person.eyeColor,
   };
 };
 
@@ -43,15 +40,8 @@ const useTransformPlanet = (planet: IDSwapiOptions<string>): IPlanet => {
 
 const useTransformStarship = (starship: IStarship): IStarship => {
   return {
+    ...starship,
     id: useExtractId(starship),
-    name: starship.name,
-    model: starship.model,
-    manufacturer: starship.manufacturer,
-    costInCredits: starship.costInCredits,
-    length: starship.length,
-    crew: starship.crew,
-    passengers: starship.passengers,
-    cargoCapacity: starship.cargoCapacity,
   };
 };
 
