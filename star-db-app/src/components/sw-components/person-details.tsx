@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ItemDetails from 'components/item-details';
-import { Record } from 'components/item-details/item-details';
+import { Record } from 'components/record/record';
 import { SwapiServiceConsumer } from 'components/swapi-service-context';
 
 interface IItemDetailsProps {

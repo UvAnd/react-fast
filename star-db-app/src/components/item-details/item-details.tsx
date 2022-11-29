@@ -4,29 +4,12 @@ import Spinner from 'components/spinner';
 
 import './item-details.css';
 
-// TItemDetails optimize TItemDetails to "Using type predicates"
-
 interface IItemDetailsProps {
   selectedItem: number | null;
   getData(itemId: number): Promise<TItemDetails>;
   getImgUrl(id: number): string;
   children?: ReactNode;
 }
-
-interface IRecordProps {
-  item?: TItemDetails;
-  field: string;
-  label: string;
-}
-
-export const Record = ({ item, field, label }: IRecordProps): JSX.Element => {
-  return (
-    <li className="list-group-item">
-      <span className="term">{label}</span>
-      <span>{item?.[field as keyof TItemDetails]}</span>
-    </li>
-  );
-};
 
 const ItemDetails = ({
   selectedItem,
