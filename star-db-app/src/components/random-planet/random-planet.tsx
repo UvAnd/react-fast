@@ -15,7 +15,6 @@ interface IRandomPlanetProps {
 const defaultInterval = 2000;
 
 const RandomPlanet = ({ updateInterval = defaultInterval }: IRandomPlanetProps): JSX.Element => {
-  // TODO: optimize Planet state
   const [planetInfo, setPlanetInfo] = useState<IPlanet | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);

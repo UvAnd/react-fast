@@ -57,8 +57,7 @@ const ItemDetails = ({
         <h6>{selectedItem}</h6>
         <ul className="list-group list-group-flush">
           {Children.map(children, (child) => {
-            // TODO: find solution to cloneElement into TS
-            return cloneElement(child as ReactElement<any>, { item });
+            return cloneElement(child as ReactElement, { item });
           })}
         </ul>
       </div>

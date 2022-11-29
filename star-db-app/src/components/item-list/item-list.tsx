@@ -11,22 +11,21 @@ interface IItemPerson {
 }
 
 const ItemList = ({ onItemSelected, getData, renderItem }: IItemPerson): JSX.Element => {
-  // TODO: Check other names and update to more generalized
-  const [peopleList, setPeopleList] = useState<TItemDetailsArray>([]);
+  const [itemList, setItemList] = useState<TItemDetailsArray>([]);
 
   useEffect(() => {
-    getData().then((peopleItem) => {
-      setPeopleList(peopleItem);
+    getData().then((infoItem) => {
+      setItemList(infoItem);
     });
   }, []);
 
-  if (!peopleList.length) {
+  if (!itemList.length) {
     return <Spinner />;
   }
 
   return (
     <ul className="item-list list-group">
-      <RenderItem list={peopleList} renderItem={renderItem} onItemSelected={onItemSelected} />
+      <RenderItem list={itemList} renderItem={renderItem} onItemSelected={onItemSelected} />
     </ul>
   );
 };

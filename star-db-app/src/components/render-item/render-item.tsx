@@ -10,8 +10,7 @@ interface IRenderItem {
 const RenderItem = ({ list, onItemSelected, renderItem }: IRenderItem): JSX.Element => {
   return (
     <>
-      {/* TODO: any */}
-      {list.map((item: any) => {
+      {list.map((item: TItemDetails) => {
         const { id } = item;
         const label = renderItem(item);
         return (
