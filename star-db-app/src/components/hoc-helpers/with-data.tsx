@@ -1,34 +1,34 @@
-// TODO: Check how we can use component like it
+// INFO: Check how we can use component like it (HOC)
 
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import Spinner from '../spinner';
-import { TItemDetailsArray } from '../../interfaces/interfaces';
-import ItemList from '../item-list';
+import Spinner from 'components/spinner';
+import { TItemDetailsArray } from 'interfaces/interfaces';
+import ItemList from 'components/item-list';
 
-// TODO: remove any
 interface IWithData {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getData: any;
 }
 
-const WithData = ({getData}: IWithData): any => {
-
+const WithData = ({ getData }: IWithData): any => {
   const [data, setData] = useState<TItemDetailsArray>([]);
 
   useEffect(() => {
-    getData()
-    .then((data: TItemDetailsArray) => {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    getData().then((data: TItemDetailsArray) => {
       setData(data);
-    })
+    });
   }, []);
 
   if (!data.length) {
-    return <Spinner></Spinner>
+    return <Spinner />;
   }
 
   return (props: any) => {
-    return  <ItemList {...props} data={data} />
-  } ;
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    return <ItemList {...props} data={data} />;
+  };
 };
 
 export default WithData;

@@ -1,29 +1,28 @@
 import React from 'react';
 
-import ItemDetails from '../item-details';
-import { Record } from '../item-details/item-details';
-import { SwapiServiceConsumer } from '../swapi-service-context';
+import ItemDetails from 'components/item-details';
+import { Record } from 'components/record/record';
+import { SwapiServiceConsumer } from 'components/swapi-service-context';
 
 interface IItemDetailsProps {
   itemId: number | null;
 }
 
-const PersonDetails = ({ itemId }: IItemDetailsProps) => {
+const PersonDetails = ({ itemId }: IItemDetailsProps): JSX.Element => {
   // INFO: OR - const value = useContext(Context); - const Context = createContext('Default Value');
 
   return (
     <SwapiServiceConsumer>
-      {(swapiServiceHooks) => (
+      {(swapiServiceUtils) => (
         <ItemDetails
           selectedItem={itemId}
-          getData={swapiServiceHooks.useGetPerson}
-          getImgUrl={swapiServiceHooks.useGetPersonImg} >
-
+          getData={swapiServiceUtils.getPerson}
+          getImgUrl={swapiServiceUtils.getPersonImg}
+        >
           <Record field="gender" label="Gender" />
           <Record field="eyeColor" label="Eye Color" />
         </ItemDetails>
       )}
-
     </SwapiServiceConsumer>
   );
 };

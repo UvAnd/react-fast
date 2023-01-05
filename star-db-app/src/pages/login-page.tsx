@@ -1,4 +1,3 @@
-
 import { Navigate } from 'react-router-dom';
 
 interface ILoginPageProps {
@@ -7,7 +6,6 @@ interface ILoginPageProps {
 }
 
 const LoginPage = ({ isLoggedIn, onLogin }: ILoginPageProps): JSX.Element => {
-
   if (isLoggedIn) {
     return <Navigate replace to="/" />;
   }
@@ -15,9 +13,7 @@ const LoginPage = ({ isLoggedIn, onLogin }: ILoginPageProps): JSX.Element => {
   return (
     <div className="jumbotron">
       <p>Login to see secret page!</p>
-      <button
-        className="btn btn-primary"
-        onClick={onLogin}>
+      <button type="button" className="btn btn-primary" onClick={onLogin}>
         Login
       </button>
     </div>

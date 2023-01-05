@@ -2,8 +2,11 @@
 const PlanetDetails = (): JSX.Element => {
   return (
     <div className="person-details card">
-      <img className="person-image"
-        src="https://starwars-visualguide.com/assets/img/characters/3.jpg"  alt=''/>
+      <img
+        className="person-image"
+        src="https://starwars-visualguide.com/assets/img/characters/3.jpg"
+        alt=""
+      />
 
       <div className="card-body">
         <h4>PlanetDetails</h4>
@@ -23,7 +26,7 @@ const PlanetDetails = (): JSX.Element => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default PlanetDetails;
