@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGetAllPeople, useGetAllStarships, useGetAllPlanets } from 'hooks/swapi-service.hooks';
+import { getAllPeople, getAllStarships, getAllPlanets } from 'utils/swapi-service.utils';
 import { IPerson, IPlanet } from 'interfaces/interfaces';
 import ItemList from 'components/item-list';
 
@@ -11,7 +11,7 @@ const PersonList = ({ onItemSelected }: IItemListProps): JSX.Element => {
   return (
     <ItemList
       onItemSelected={onItemSelected}
-      getData={useGetAllPeople}
+      getData={getAllPeople}
       // How we can use
       // <>{(data: any) => (`${data.name} (${data.gender}, ${data.birthYear})`)}</> like child
       // Function as Child Component
@@ -24,7 +24,7 @@ const PlanetList = ({ onItemSelected }: IItemListProps): JSX.Element => {
   return (
     <ItemList
       onItemSelected={onItemSelected}
-      getData={useGetAllPlanets}
+      getData={getAllPlanets}
       renderItem={({ id, name }: IPlanet) => `${name} (${id})`}
     />
   );
@@ -34,7 +34,7 @@ const StarshipList = ({ onItemSelected }: IItemListProps): JSX.Element => {
   return (
     <ItemList
       onItemSelected={onItemSelected}
-      getData={useGetAllStarships}
+      getData={getAllStarships}
       renderItem={({ name }: IPerson) => `${name}`}
     />
   );

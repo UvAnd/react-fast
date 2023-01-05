@@ -1,6 +1,7 @@
-import { Children, cloneElement, ReactElement, ReactNode, useEffect, useState } from 'react';
+import { Children, cloneElement, ReactElement, ReactNode } from 'react';
 import { TItemDetails } from 'interfaces/interfaces';
 import Spinner from 'components/spinner';
+import useGetItemDetails from 'components/item-details/item-details.hooks';
 
 import './item-details.css';
 
@@ -17,32 +18,13 @@ const ItemDetails = ({
   getImgUrl,
   children,
 }: IItemDetailsProps): JSX.Element => {
-  const [item, setItem] = useState<TItemDetails | null>(null);
-  const [isLoadin, setIsLoadin] = useState<boolean>(false);
-
-  const updatePerson = (): void => {
-    const personId = selectedItem;
-    if (!personId) {
-      return;
-    }
-
-    setIsLoadin(true);
-
-    getData(personId).then((itemDetails) => {
-      setItem(itemDetails);
-      setIsLoadin(false);
-    });
-  };
-
-  useEffect(() => {
-    updatePerson();
-  }, [selectedItem]);
+  const { item, isLoading } = useGetItemDetails({ selectedItem, getData });
 
   if (!item) {
     return <span>Select a person from a list</span>;
   }
 
-  if (isLoadin) {
+  if (isLoading) {
     return <Spinner />;
   }
 

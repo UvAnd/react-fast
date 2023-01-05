@@ -13,11 +13,11 @@ const PersonDetails = ({ itemId }: IItemDetailsProps): JSX.Element => {
 
   return (
     <SwapiServiceConsumer>
-      {(swapiServiceHooks) => (
+      {(swapiServiceUtils) => (
         <ItemDetails
           selectedItem={itemId}
-          getData={swapiServiceHooks.useGetPerson}
-          getImgUrl={swapiServiceHooks.useGetPersonImg}
+          getData={swapiServiceUtils.getPerson}
+          getImgUrl={swapiServiceUtils.getPersonImg}
         >
           <Record field="gender" label="Gender" />
           <Record field="eyeColor" label="Eye Color" />

@@ -17,7 +17,7 @@ const ItemList = ({ onItemSelected, getData, renderItem }: IItemPerson): JSX.Ele
     getData().then((infoItem) => {
       setItemList(infoItem);
     });
-  }, []);
+  }, [getData]);
 
   if (!itemList.length) {
     return <Spinner />;

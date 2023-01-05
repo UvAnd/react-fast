@@ -11,11 +11,11 @@ interface IItemDetailsProps {
 const StarshipDetails = ({ itemId }: IItemDetailsProps): JSX.Element => {
   return (
     <SwapiServiceConsumer>
-      {(swapiServiceHooks) => (
+      {(swapiServiceUtils) => (
         <ItemDetails
           selectedItem={itemId}
-          getData={swapiServiceHooks.useGetStarship}
-          getImgUrl={swapiServiceHooks.useGetStarshipImg}
+          getData={swapiServiceUtils.getStarship}
+          getImgUrl={swapiServiceUtils.getStarshipImg}
         >
           <Record field="model" label="Model" />
           <Record field="length" label="Length" />

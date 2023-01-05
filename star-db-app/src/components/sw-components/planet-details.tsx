@@ -11,11 +11,11 @@ interface IItemDetailsProps {
 const PlanetDetails = ({ itemId }: IItemDetailsProps): JSX.Element => {
   return (
     <SwapiServiceConsumer>
-      {(swapiServiceHooks) => (
+      {(swapiServiceUtils) => (
         <ItemDetails
           selectedItem={itemId}
-          getData={swapiServiceHooks.useGetPlanet}
-          getImgUrl={swapiServiceHooks.useGetPlanetImg}
+          getData={swapiServiceUtils.getPlanet}
+          getImgUrl={swapiServiceUtils.getPlanetImg}
         >
           <Record field="population" label="Population" />
           <Record field="rotationPeriod" label="Rotation Period" />
