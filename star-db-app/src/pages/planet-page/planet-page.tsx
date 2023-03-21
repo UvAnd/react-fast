@@ -1,22 +1,18 @@
 import { useState } from 'react';
-import Row from '../components/row';
-import { PlanetDetails, PlanetList } from '../../components/sw-components';
+import { PlanetDetails, PlanetList } from 'components/sw-components';
+import Row from 'pages/components/row';
 
 const PlanetPage = (): JSX.Element => {
   const [selectedPlanet, setSelectedPlanet] = useState<number | null>(null);
 
-  const onOpenPlanet = (id: number) => {
+  const onOpenPlanet = (id: number): void => {
     setSelectedPlanet(id);
-  }
+  };
 
   return (
     <Row
-      leftChild={
-        <PlanetList onItemSelected={onOpenPlanet} ></PlanetList>
-        }
-      rightChild={
-        <PlanetDetails itemId={selectedPlanet}></PlanetDetails>
-      }
+      leftChild={<PlanetList onItemSelected={onOpenPlanet} />}
+      rightChild={<PlanetDetails itemId={selectedPlanet} />}
     />
   );
 };

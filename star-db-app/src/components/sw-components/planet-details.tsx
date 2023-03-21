@@ -1,22 +1,22 @@
 import React from 'react';
 
-import ItemDetails from '../item-details';
-import { Record } from '../item-details/item-details';
-import { SwapiServiceConsumer } from '../swapi-service-context';
+import ItemDetails from 'components/item-details';
+import { Record } from 'components/record/record';
+import { SwapiServiceConsumer } from 'components/swapi-service-context';
 
 interface IItemDetailsProps {
   itemId: number | null;
 }
 
-const PlanetDetails = ({ itemId }: IItemDetailsProps) => {
+const PlanetDetails = ({ itemId }: IItemDetailsProps): JSX.Element => {
   return (
     <SwapiServiceConsumer>
-      {(swapiServiceHooks) => (
+      {(swapiServiceUtils) => (
         <ItemDetails
           selectedItem={itemId}
-          getData={swapiServiceHooks.useGetPlanet}
-          getImgUrl={swapiServiceHooks.useGetPlanetImg}>
-
+          getData={swapiServiceUtils.getPlanet}
+          getImgUrl={swapiServiceUtils.getPlanetImg}
+        >
           <Record field="population" label="Population" />
           <Record field="rotationPeriod" label="Rotation Period" />
           <Record field="diameter" label="Diameter" />

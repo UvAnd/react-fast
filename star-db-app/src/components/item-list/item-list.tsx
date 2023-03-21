@@ -1,62 +1,33 @@
-import { useEffect, useState } from 'react';
-import { IPerson, TRenderChild } from '../../interfaces/interfaces';
-import Spinner from '../spinner';
+import { useEffect, useState, ReactNode } from 'react';
+import { TItemDetails, TItemDetailsArray } from 'interfaces/interfaces';
+import Spinner from 'components/spinner';
 import './item-list.css';
+import RenderItem from 'components/render-item';
 
 interface IItemPerson {
   onItemSelected(id: number): void;
-  getData(): Promise<IPerson[]>;
-  renderItem(list: IPerson): TRenderChild;
-}
-interface IRenderItem {
-  list: IPerson[];
-  onItemSelected(id: number): void;
-  renderItem(list: IPerson): TRenderChild;
+  getData(): Promise<TItemDetailsArray>;
+  renderItem(list: TItemDetails): ReactNode;
 }
 
-const ItemList = ({onItemSelected, getData, renderItem}: IItemPerson): JSX.Element => {
-
-  const [peopleList, setPeopleList] = useState<IPerson[]>([]);
+const ItemList = ({ onItemSelected, getData, renderItem }: IItemPerson): JSX.Element => {
+  const [itemList, setItemList] = useState<TItemDetailsArray>([]);
 
   useEffect(() => {
-    getData()
-    .then((peopleItem) => {
-      setPeopleList(peopleItem);
-    })
-  }, []);
+    getData().then((infoItem) => {
+      setItemList(infoItem);
+    });
+  }, [getData]);
 
-  if (!peopleList.length) {
-    return <Spinner></Spinner>
+  if (!itemList.length) {
+    return <Spinner />;
   }
 
   return (
     <ul className="item-list list-group">
-      <RenderItem list={peopleList} renderItem={renderItem} onItemSelected={onItemSelected} />
+      <RenderItem list={itemList} renderItem={renderItem} onItemSelected={onItemSelected} />
     </ul>
   );
-}
-
-
-const RenderItem = ({ list, onItemSelected, renderItem }: IRenderItem): JSX.Element => {
-  return (
-    <>
-      {
-        list.map((item: any) => {
-          const { id } = item;
-          const label = renderItem(item);
-          return (
-            <li key={id} className="list-group-item" onClick={() => onItemSelected(id)}>
-              {label}
-            </li>
-          );
-        })
-      }
-    </>
-  );
-}
-
-ItemList.defaulteProps = {
-  onItemSelected: () => {}
-}
+};
 
 export default ItemList;

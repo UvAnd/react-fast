@@ -1,3 +1,3 @@
-import RoutesList from './routes';
+import RoutesList from 'components/routes/routes';
 
 export default RoutesList;

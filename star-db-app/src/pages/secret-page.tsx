@@ -1,4 +1,3 @@
-
 import { Navigate } from 'react-router-dom';
 
 interface ISecretPageProps {
@@ -6,7 +5,6 @@ interface ISecretPageProps {
 }
 
 const SecretPage = ({ isLoggedIn }: ISecretPageProps): JSX.Element => {
-
   if (isLoggedIn) {
     return (
       <div className="jumbotron text-center">
@@ -15,8 +13,11 @@ const SecretPage = ({ isLoggedIn }: ISecretPageProps): JSX.Element => {
     );
   }
 
-  return <>{<Navigate replace to="/login" />}</>;
-
+  return (
+    <>
+      <Navigate replace to="/login" />
+    </>
+  );
 };
 
 export default SecretPage;
